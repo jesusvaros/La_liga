@@ -4,10 +4,15 @@ import {
   FetchUsersFailure,
   FetchUsersSuccessPayload,
   FetchUsersSuccess,
+  FetchUsersRequestPayload,
+  FetchUsersRequest,
 } from "./types";
 
-export const fetchUsersRequest = () => ({
+export const fetchUsersRequest = (
+  payload: FetchUsersRequestPayload
+): FetchUsersRequest => ({
   type: postTypes.FETCH_USER_REQUEST,
+  payload,
 });
 
 export const fetchUsersSuccess = (

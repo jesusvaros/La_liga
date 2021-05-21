@@ -1,4 +1,6 @@
 import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUsersRequest } from "../../store/users/actions";
 import { PaginatorWrapp, NumberButton, Left, Right } from "./styles";
 
 type PaginationProps = {
@@ -8,11 +10,14 @@ type PaginationProps = {
 };
 
 const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
+  const dispatch = useDispatch();
+
   const selectPage = useCallback(
     (item: number) => () => {
       console.log(item);
+      dispatch(fetchUsersRequest({ page: item }));
     },
-    []
+    [dispatch]
   );
 
   const disabledLeft = pending || currentPage === 1;

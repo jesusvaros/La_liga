@@ -13,12 +13,10 @@ const MainView = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchUsersRequest());
+    dispatch(fetchUsersRequest({ page: 1 }));
   }, [dispatch]);
 
-  if (pending || !usersResponse) {
-    return <>loading</>;
-  } else {
+  if (usersResponse) {
     return (
       <>
         <CardsWrapp>
@@ -34,6 +32,8 @@ const MainView = () => {
         {/* Modal Error */}
       </>
     );
+  } else {
+    return <>loading</>;
   }
 };
 

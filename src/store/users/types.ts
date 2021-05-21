@@ -11,7 +11,9 @@ export interface UsersState {
   usersResponse: GetUserResponse | undefined;
   error: string | null;
 }
-
+export interface FetchUsersRequestPayload {
+  page: number;
+}
 export interface FetchUsersSuccessPayload {
   users: GetUserResponse;
 }
@@ -22,6 +24,7 @@ export interface FetchUsersFailurePayload {
 
 export interface FetchUsersRequest {
   type: typeof postTypes.FETCH_USER_REQUEST;
+  payload: FetchUsersRequestPayload;
 }
 
 export type FetchUsersSuccess = {

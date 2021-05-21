@@ -2,15 +2,14 @@ import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { fetchUsersSuccess, fetchUsersFailure } from "./actions";
 import { GetUserResponse } from "./models";
-import { postTypes } from "./types";
+import { FetchUsersRequest, postTypes } from "./types";
 
-const getUsers = () =>
-  // Add ?page={number} add the end of the endpoint to see next page
-  axios.get<GetUserResponse[]>("https://reqres.in/api/users?page=2");
+const getUsers = (page: number) => () =>
+  axios.get<GetUserResponse[]>(`https://reqres.in/api/users?page=${page}`);
 
-function* fetchUsersSaga() {
+function* fetchUsersSaga(action: FetchUsersRequest) {
   try {
-    const response: AxiosResponse = yield call(getUsers);
+    const response: AxiosResponse = yield call(getUsers(action.payload.page));
     yield put(
       fetchUsersSuccess({
         users: response.data,
