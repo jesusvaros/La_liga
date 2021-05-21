@@ -2,7 +2,7 @@ import { UsersActions, UsersState, postTypes } from "./types";
 
 const initialState: UsersState = {
   pending: false,
-  users: [],
+  usersResponse: undefined,
   error: null,
 };
 
@@ -20,14 +20,13 @@ const UserReducer = (
       return {
         ...state,
         pending: false,
-        users: action.payload.users,
+        usersResponse: action.payload.users,
         error: null,
       };
     case postTypes.FETCH_USER_FAILURE:
       return {
         ...state,
         pending: false,
-        users: [],
         error: action.payload.error,
       };
     default:

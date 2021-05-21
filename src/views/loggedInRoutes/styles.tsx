@@ -4,15 +4,15 @@ import { ReactComponent as Liga } from "../../assets/laliga.svg";
 
 export const PageWrapp = styled.div`
   display: flex;
-  border: 1px solid blue;
   flex-direction: column;
+  height: 100vh;
 `;
 
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px 20px;
-  border: 1px solid red;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.08);
   justify-content: flex-start;
 `;
 

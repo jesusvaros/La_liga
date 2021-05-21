@@ -1,4 +1,4 @@
-import { User } from "./models";
+import { GetUserResponse } from "./models";
 
 export enum postTypes {
   FETCH_USER_REQUEST = "FETCH_USER_REQUEST",
@@ -8,12 +8,12 @@ export enum postTypes {
 
 export interface UsersState {
   pending: boolean;
-  users: User[];
+  usersResponse: GetUserResponse | undefined;
   error: string | null;
 }
 
 export interface FetchUsersSuccessPayload {
-  users: User[];
+  users: GetUserResponse;
 }
 
 export interface FetchUsersFailurePayload {
