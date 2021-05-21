@@ -1,6 +1,7 @@
 import React from "react";
+
 import { Route, Switch } from "react-router-dom";
-import MainView from "../mainView";
+import MainView from "./mainView";
 
 import { PageWrapp, Header, LigaIcon } from "./styles";
 

@@ -1,0 +1,15 @@
+export interface User {
+  id: number;
+  firs_name: string;
+  last_name: string;
+  avatar: string;
+  email: string;
+}
+
+export interface GetUserResponse {
+  data: User[];
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+}
