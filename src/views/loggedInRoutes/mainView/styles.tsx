@@ -42,7 +42,11 @@ export const TextError = styled.span`
   font-size: 14px;
   margin-bottom: 24px;
 `;
-export const Button = styled.div`
+export const Button = styled.div<{
+  background?: string;
+  color?: string;
+  max_width?: number;
+}>`
   background: #2b63e7;
   border-radius: 4px;
   display: flex;
@@ -53,7 +57,14 @@ export const Button = styled.div`
   font-weight: 900;
   font-size: 14px;
   cursor: pointer;
-  :hover{
+
+  ${({ background }) => background && `background:${background}`};
+  ${({ color }) => color && `color:${color}`};
+  ${({ max_width }) => max_width && `max-width:${max_width}px`};
+  svg {
+    margin-right: 12px;
+  }
+  :hover {
     opacity: 0.9;
   }
 `;
@@ -61,13 +72,12 @@ export const Button = styled.div`
 export const AbsoluteWrapp = styled.div`
   position: absolute;
   background-color: white;
-  padding:44px;
+  padding: 44px;
   border-radius: 14px;
-  top:calc(50% + 165px);
+  top: calc(50% + 165px);
   left: calc(50% - 95px);
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px 0, rgba(0, 0, 0, 0.05) 0 0 4px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
+`;

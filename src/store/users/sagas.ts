@@ -1,11 +1,16 @@
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { fetchUsersSuccess, fetchUsersFailure } from "./actions";
-import { GetUserResponse } from "./models";
-import { FetchUsersRequest, postTypes } from "./types";
+import {
+  fetchUsersSuccess,
+  fetchUsersFailure,
+  fetchUserSuccess,
+  fetchUserFailure,
+} from "./actions";
+import { GetUsersResponse } from "./models";
+import { FetchUserRequest, FetchUsersRequest, postTypes } from "./types";
 
 const getUsers = (page: number) => () =>
-  axios.get<GetUserResponse[]>(`https://reqres.in/api/users?page=${page}`);
+  axios.get<GetUsersResponse[]>(`https://reqres.in/api/users?page=${page}`);
 
 function* fetchUsersSaga(action: FetchUsersRequest) {
   try {
@@ -24,8 +29,29 @@ function* fetchUsersSaga(action: FetchUsersRequest) {
   }
 }
 
+const getUser = (id: number) => () =>
+  axios.get<GetUsersResponse[]>(`https://reqres.in/api/users/${id}`);
+
+function* fetchUserSaga(action: FetchUserRequest) {
+  try {
+    const response: AxiosResponse = yield call(getUser(action.payload.id));
+    yield put(
+      fetchUserSuccess({
+        user: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      fetchUserFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
 function* usersSaga() {
-  yield all([takeLatest(postTypes.FETCH_USER_REQUEST, fetchUsersSaga)]);
+  yield all([takeLatest(postTypes.FETCH_USERS_REQUEST, fetchUsersSaga)]);
+  yield all([takeLatest(postTypes.FETCH_USER_REQUEST, fetchUserSaga)]);
 }
 
 export default usersSaga;

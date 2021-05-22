@@ -6,7 +6,7 @@ export interface User {
   email: string;
 }
 
-export interface GetUserResponse {
+export interface GetUsersResponse {
   data: User[];
   page: number;
   per_page: number;

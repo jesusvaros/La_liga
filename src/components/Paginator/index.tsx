@@ -14,7 +14,6 @@ const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
 
   const selectPage = useCallback(
     (item: number) => () => {
-      console.log(item);
       dispatch(fetchUsersRequest({ page: item }));
     },
     [dispatch]
