@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { Loader } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../../../components/Card";
 import Pagination from "../../../components/Paginator";
 import { RootState } from "../../../store/reducer";
 import { fetchUsersRequest } from "../../../store/users/actions";
-import { CardsWrapp } from "./styles";
+import { Button, CardsWrapp, LoaderWrapp, TextError } from "./styles";
 
 const MainView = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ const MainView = () => {
   );
 
   useEffect(() => {
+    dispatch(fetchUsersRequest({ page: 1 }));
+  }, [dispatch]);
+
+  const fetchData = useCallback(() => {
     dispatch(fetchUsersRequest({ page: 1 }));
   }, [dispatch]);
 
@@ -29,11 +34,20 @@ const MainView = () => {
           totalPages={usersResponse.total_pages}
           pending={pending}
         />
-        {/* Modal Error */}
       </>
     );
   } else {
-    return <>loading</>;
+    return (
+      <LoaderWrapp>
+        <Loader />
+        {error && (
+          <>
+            <TextError>{error}</TextError>
+            <Button onClick={fetchData}>Recharge</Button>
+          </>
+        )}
+      </LoaderWrapp>
+    );
   }
 };
 
