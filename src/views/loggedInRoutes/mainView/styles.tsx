@@ -7,6 +7,7 @@ export const CardsWrapp = styled.div`
   padding: 24px;
   flex-wrap: wrap;
   overflow: auto;
+  position: relative;
 `;
 
 export const LoaderWrapp = styled.div`
@@ -39,6 +40,7 @@ export const LoaderWrapp = styled.div`
 
 export const TextError = styled.span`
   font-size: 14px;
+  margin-bottom: 24px;
 `;
 export const Button = styled.div`
   background: #2b63e7;
@@ -50,4 +52,22 @@ export const Button = styled.div`
   color: white;
   font-weight: 900;
   font-size: 14px;
+  cursor: pointer;
+  :hover{
+    opacity: 0.9;
+  }
 `;
+
+export const AbsoluteWrapp = styled.div`
+  position: absolute;
+  background-color: white;
+  padding:44px;
+  border-radius: 14px;
+  top:calc(50% + 165px);
+  left: calc(50% - 95px);
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px 0, rgba(0, 0, 0, 0.05) 0 0 4px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+

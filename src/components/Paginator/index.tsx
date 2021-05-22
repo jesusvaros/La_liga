@@ -32,6 +32,7 @@ const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
         const selected = pending || currentPage === index + 1;
         return (
           <NumberButton
+            key={index}
             onClick={selected ? undefined : selectPage(index + 1)}
             selected={selected}
           >
