@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# La Liga App
+
+Project made by Jesus Vazquez Rosa.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation Guide
+
+    After downloaded or cloned the proyect you need to run `yarn` on the 
+    console to install all the dependencies
+
+    Then you have to run `yarn start` and the web will run on port 3000.
+
+
+## Dependencies
 
 The package installed for this project can be found on `package.json` the most important libraries used to make the web are:
 
@@ -29,13 +41,6 @@ The ones that were not required on the guide are:
 
 All this libraries need to have installed their correponding types to work on typescript.
 
-
-## Installation Guide
-
-    After downloaded or cloned the proyect you need to run `yarn` on the 
-    console to install all the dependencies
-
-    Then you have to run `yarn start` and the web will run on port 3000.
 ## Available Scripts
 
 ### `yarn start`
