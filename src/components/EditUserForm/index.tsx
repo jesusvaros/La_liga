@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ArrowLeft, XOctagon } from "react-feather";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { useRouteMatch } from "react-router-dom";
 import { reduxForm, InjectedFormProps, Field } from "redux-form";
 import { RootState } from "../../store/reducer";
+import { deleteUserRequest } from "../../store/users/actions";
 import { Button } from "../../views/loggedInRoutes/mainView/styles";
 import {
   FooterButtons,
@@ -16,7 +18,15 @@ import {
 
 const EditUserDetailForm = ({ handleSubmit }: InjectedFormProps) => {
   const { goBack } = useHistory();
+  const { params } = useRouteMatch<{ id: string }>();
+  const userId = parseInt(params.id);
+  const dispatch = useDispatch();
   const { pending } = useSelector((state: RootState) => state.users);
+  const onDelete = useCallback(() => {
+    dispatch(deleteUserRequest({ id: userId }));
+    goBack();
+  }, [dispatch, userId, goBack]);
+
   return (
     <Form onSubmit={handleSubmit}>
       <FormContainer>
@@ -33,7 +43,8 @@ const EditUserDetailForm = ({ handleSubmit }: InjectedFormProps) => {
           <Field name="email" component="input" type="text" />
         </Wrapp>
         <Button
-          onClick={goBack}
+          onClick={pending ? undefined : onDelete}
+          disabled={pending}
           background="black"
           color="white"
           max_width={160}

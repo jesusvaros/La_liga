@@ -3,24 +3,44 @@ import { Loader } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../../../components/Card";
 import ErrorModal from "../../../components/ErrorModal";
+import {
+  AbsoluteWrapp,
+  TextError,
+} from "../../../components/ErrorModal/styles";
 import Pagination from "../../../components/Paginator";
 import { RootState } from "../../../store/reducer";
-import { fetchUsersRequest } from "../../../store/users/actions";
-import { CardsWrapp, LoaderWrapp, BlurScreen } from "./styles";
+import {
+  fetchUsersRequest,
+  setSubmittedFalse,
+} from "../../../store/users/actions";
+import { CardsWrapp, LoaderWrapp, BlurScreen, Button } from "./styles";
 
 const MainView = () => {
   const dispatch = useDispatch();
-  const { pending, users, error } = useSelector(
+  const { pending, users, error, deleted } = useSelector(
     (state: RootState) => state.users
   );
 
   useEffect(() => {
-    dispatch(fetchUsersRequest({ page: 1 }));
-  }, [dispatch]);
+    if (!users) {
+      dispatch(fetchUsersRequest({ page: 1 }));
+    }
+  }, [dispatch, users]);
 
   const fetchData = useCallback(() => {
     dispatch(fetchUsersRequest({ page: 1 }));
   }, [dispatch]);
+
+  const closeModal = useCallback(() => {
+    dispatch(setSubmittedFalse());
+  }, [dispatch]);
+
+  const deletedModal = (
+    <AbsoluteWrapp>
+      <TextError>User deleted successfully</TextError>
+      <Button onClick={closeModal}>Close</Button>
+    </AbsoluteWrapp>
+  );
 
   if (users) {
     return (
@@ -29,13 +49,8 @@ const MainView = () => {
           {users.data.map((user) => (
             <UserCard key={user.id} {...user} />
           ))}
-          {error && (
-            <ErrorModal
-              error={error}
-              pending={pending}
-              onRecharge={fetchData}
-            />
-          )}
+          <ErrorModal error={error} pending={pending} onRecharge={fetchData} />
+          {deleted && deletedModal}
         </CardsWrapp>
         <Pagination
           currentPage={users.page}

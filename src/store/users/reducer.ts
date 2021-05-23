@@ -6,6 +6,7 @@ const initialState: UsersState = {
   error: null,
   detailUser: undefined,
   submitted: false,
+  deleted: false,
 };
 
 const UserReducer = (
@@ -60,7 +61,9 @@ const UserReducer = (
     case userTypes.EDIT_USER_SUCCESS:
       const users = state.users
         ? state.users.data.map((user) =>
-            user.id === action.payload.user.id ? action.payload.user : user
+            user.id === action.payload.user.id
+              ? { ...action.payload.user, avatar: user.avatar }
+              : user
           )
         : [];
       return {
@@ -74,6 +77,7 @@ const UserReducer = (
       return {
         ...state,
         submitted: false,
+        deleted: false,
       };
     case userTypes.EDIT_USER_FAILURE:
       return {
@@ -81,6 +85,32 @@ const UserReducer = (
         pending: false,
         error: action.payload.error,
       };
+
+    // Delete user
+    case userTypes.DELETE_USER_REQUEST:
+      return {
+        ...state,
+        pending: true,
+      };
+    case userTypes.DELETE_USER_SUCCESS:
+      const newUsers = state.users
+        ? state.users.data.filter((user) => user.id !== action.payload.userId)
+        : [];
+      return {
+        ...state,
+        pending: false,
+        users: state.users ? { ...state.users, data: newUsers } : undefined,
+        deleted: true,
+        error: null,
+      };
+
+    case userTypes.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        error: action.payload.error,
+      };
+
     default:
       return state;
   }

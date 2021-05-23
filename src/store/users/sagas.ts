@@ -7,9 +7,13 @@ import {
   fetchUserFailure,
   editUserSuccess,
   editUserFailure,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "./actions";
 import { GetUsersResponse, User } from "./models";
 import {
+  DeleteUserRequest,
+  DeleteUserRequestPayload,
   EditUserRequest,
   EditUserRequestPayload,
   FetchUserRequest,
@@ -60,7 +64,7 @@ function* fetchUserSaga(action: FetchUserRequest) {
 const editUser = (payload: EditUserRequestPayload) => () =>
   axios.patch<User>(`https://reqres.in/api/users/${payload.id}`, payload.data);
 
-function* editchUserSaga(action: EditUserRequest) {
+function* editUserSaga(action: EditUserRequest) {
   try {
     const response: AxiosResponse<User> = yield call(editUser(action.payload));
     yield put(
@@ -75,10 +79,27 @@ function* editchUserSaga(action: EditUserRequest) {
   }
 }
 
+const deleteUser = (payload: DeleteUserRequestPayload) => () =>
+  axios.delete<User>(`https://reqres.in/api/users/${payload.id}`);
+
+function* deleteUserSaga(action: DeleteUserRequest) {
+  try {
+    yield call(deleteUser(action.payload));
+    yield put(deleteUserSuccess({ userId: action.payload.id }));
+  } catch (e) {
+    yield put(
+      deleteUserFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
 function* usersSaga() {
   yield all([takeLatest(userTypes.FETCH_USERS_REQUEST, fetchUsersSaga)]);
   yield all([takeLatest(userTypes.FETCH_USER_REQUEST, fetchUserSaga)]);
-  yield all([takeLatest(userTypes.EDIT_USER_REQUEST, editchUserSaga)]);
+  yield all([takeLatest(userTypes.EDIT_USER_REQUEST, editUserSaga)]);
+  yield all([takeLatest(userTypes.DELETE_USER_REQUEST, deleteUserSaga)]);
 }
 
 export default usersSaga;

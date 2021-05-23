@@ -21,6 +21,13 @@ import {
   EditUserSuccess,
   EditUserFailurePayload,
   EditUserFailure,
+  //Delete user
+  DeleteUserRequestPayload,
+  DeleteUserRequest,
+  DeleteUserSuccessPayload,
+  DeleteUserSuccess,
+  DeleteUserFailurePayload,
+  DeleteUserFailure,
 } from "./types";
 
 // Get all users
@@ -94,4 +101,27 @@ export const editUserFailure = (
 
 export const setSubmittedFalse = () => ({
   type: userTypes.SET_EDIT_USER_FALSE,
+});
+
+// Delete user
+
+export const deleteUserRequest = (
+  payload: DeleteUserRequestPayload
+): DeleteUserRequest => ({
+  type: userTypes.DELETE_USER_REQUEST,
+  payload,
+});
+
+export const deleteUserSuccess = (
+  payload: DeleteUserSuccessPayload
+): DeleteUserSuccess => ({
+  type: userTypes.DELETE_USER_SUCCESS,
+  payload,
+});
+
+export const deleteUserFailure = (
+  payload: DeleteUserFailurePayload
+): DeleteUserFailure => ({
+  type: userTypes.DELETE_USER_FAILURE,
+  payload,
 });

@@ -13,6 +13,10 @@ export enum userTypes {
   EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS",
   EDIT_USER_FAILURE = "EDIT_USER_FAILURE",
   SET_EDIT_USER_FALSE = "SET_EDIT_USER_FALSE",
+
+  DELETE_USER_REQUEST = "DELETE_USER_REQUEST",
+  DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS",
+  DELETE_USER_FAILURE = "DELETE_USER_FAILURE",
 }
 
 export interface UsersState {
@@ -21,6 +25,7 @@ export interface UsersState {
   error: string | null;
   detailUser: { data: User } | undefined;
   submitted: boolean;
+  deleted: boolean;
 }
 
 // Get all users
@@ -114,6 +119,34 @@ export type SetSendedFalse = {
   type: typeof userTypes.SET_EDIT_USER_FALSE;
 };
 
+// Delete user
+
+export interface DeleteUserRequestPayload {
+  id: number;
+}
+export interface DeleteUserSuccessPayload {
+  userId: number;
+}
+
+export interface DeleteUserFailurePayload {
+  error: string;
+}
+
+export interface DeleteUserRequest {
+  type: typeof userTypes.DELETE_USER_REQUEST;
+  payload: DeleteUserRequestPayload;
+}
+
+export type DeleteUserSuccess = {
+  type: typeof userTypes.DELETE_USER_SUCCESS;
+  payload: DeleteUserSuccessPayload;
+};
+
+export type DeleteUserFailure = {
+  type: typeof userTypes.DELETE_USER_FAILURE;
+  payload: DeleteUserFailurePayload;
+};
+
 export type UsersActions =
   | FetchUsersRequest
   | FetchUsersSuccess
@@ -124,4 +157,7 @@ export type UsersActions =
   | EditUserRequest
   | EditUserSuccess
   | EditUserFailure
-  | SetSendedFalse;
+  | SetSendedFalse
+  | DeleteUserRequest
+  | DeleteUserSuccess
+  | DeleteUserFailure;

@@ -32,21 +32,22 @@ const DetailUserView = () => {
     dispatch(fetchUserRequest({ id: userId }));
   }, [dispatch, userId]);
 
-  const clooseModal = useCallback(() => {
+  const closeModal = useCallback(() => {
     dispatch(setSubmittedFalse());
   }, [dispatch]);
 
-  const submittedModal = (
-    <AbsoluteWrapp>
-      <TextError>User edited successfully</TextError>
-      <Button onClick={clooseModal}>Close</Button>
-    </AbsoluteWrapp>
-  );
   const onSubmit = useCallback(
     (data) => {
       dispatch(editUserRequest({ id: userId, data }));
     },
     [dispatch, userId]
+  );
+
+  const submittedModal = (
+    <AbsoluteWrapp>
+      <TextError>User edited successfully</TextError>
+      <Button onClick={closeModal}>Close</Button>
+    </AbsoluteWrapp>
   );
 
   if (detailUser) {
