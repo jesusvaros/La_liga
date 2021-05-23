@@ -20,7 +20,7 @@ const PasswordField: FC<WrappedFieldProps> = ({ input }) => {
 
   return (
     <Wrapp>
-      <Label>Enter your password.</Label>
+      <Label>Password.</Label>
       <input id="password" type={type} {...input} />
       <Icon onClick={toggleFieldType} />
     </Wrapp>
@@ -31,7 +31,7 @@ const LoginForm: FC<InjectedFormProps> = ({ handleSubmit, invalid }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Wrapp>
-        <Label>Email</Label>
+        <Label>Email.</Label>
         <Field name="email" component="input" type="text" />
       </Wrapp>
       <Field name="password" component={PasswordField} />

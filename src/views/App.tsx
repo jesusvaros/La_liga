@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/reducer";
 import LoggedIndRoutes from "./loggedInRoutes";
 import LoginView from "./login";
 
 function App() {
-  const isLoggedIn = false;
+  const { token } = useSelector((state: RootState) => state.auth);
 
-  if (isLoggedIn) {
+  if (token) {
     return <LoggedIndRoutes />;
   }
   return <LoginView />;
