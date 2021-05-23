@@ -1,8 +1,20 @@
-import React from "react";
-import { LoginWrapp } from "./styles";
+import React, { useCallback } from "react";
+import LoginForm from "../../components/LoginForm";
+import { LoginWrapp, LoginCard, LigaIcon } from "./styles";
 
-const Login = () => {
-  return <LoginWrapp>form 1 form 2 submit button</LoginWrapp>;
+const LoginView = () => {
+  const onSubmit = useCallback((data) => {
+    console.log(data);
+  }, []);
+
+  return (
+    <LoginWrapp>
+      <LoginCard>
+        <LigaIcon />
+        <LoginForm onSubmit={onSubmit} />
+      </LoginCard>
+    </LoginWrapp>
+  );
 };
 
-export default Login;
+export default LoginView;

@@ -47,10 +47,17 @@ export const Wrapp = styled.div`
   display: flex;
   flex-direction: column;
   margin: 16px 0;
+  position: relative;
   > input {
     border-radius: 4px;
     border-color: #2b63e7;
     font-size: 16px;
     height: 24px;
+  }
+  > svg {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    height: 20px;
   }
 `;

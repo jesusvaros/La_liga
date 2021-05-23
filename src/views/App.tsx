@@ -1,13 +1,14 @@
 import React from "react";
 import LoggedIndRoutes from "./loggedInRoutes";
+import LoginView from "./login";
 
 function App() {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   if (isLoggedIn) {
     return <LoggedIndRoutes />;
   }
-  return <div className="App">a</div>;
+  return <LoginView />;
 }
 
 export default App;
