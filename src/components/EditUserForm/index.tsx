@@ -16,12 +16,16 @@ import {
   MaxWidth,
 } from "./styles";
 
+// Component that uses the redux form library to manage the formularies in the web.
+
 const EditUserDetailForm = ({ handleSubmit }: InjectedFormProps) => {
   const { goBack } = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const userId = parseInt(params.id);
   const dispatch = useDispatch();
   const { pending } = useSelector((state: RootState) => state.users);
+
+  // Function to delete the user, then redirects the user to the mainViews that will not show that user.
   const onDelete = useCallback(() => {
     dispatch(deleteUserRequest({ id: userId }));
     goBack();

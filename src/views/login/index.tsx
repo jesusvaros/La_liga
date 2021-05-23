@@ -28,6 +28,7 @@ const LoginView = () => {
     dispatch(RemoveAuthError());
   }, [dispatch]);
 
+  // Cloose the error modal after 5secs
   useEffect(() => {
     if (error) {
       setTimeout(() => {
@@ -36,6 +37,7 @@ const LoginView = () => {
     }
   }, [error, clooseModalError]);
 
+  // Log in validation callbacks it needs the clientId to work properly
   const onSuccessGoogleLogIn = useCallback((res) => {
     setToken(res.token);
   }, []);

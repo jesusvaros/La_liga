@@ -20,7 +20,8 @@ const MainView = () => {
   const { pending, users, error, deleted } = useSelector(
     (state: RootState) => state.users
   );
-
+  // I'm not fetching the data every time becouse the edit and the delete does not work well
+  // and becouse of that if we have users in the state we will show the modified ones
   useEffect(() => {
     if (!users) {
       dispatch(fetchUsersRequest({ page: 1 }));
@@ -31,17 +32,18 @@ const MainView = () => {
     dispatch(fetchUsersRequest({ page: 1 }));
   }, [dispatch]);
 
-  const closeModal = useCallback(() => {
+  // Set the var on the state that opens the change modal to false
+  const clooseModal = useCallback(() => {
     dispatch(setSubmittedFalse());
   }, [dispatch]);
 
   const deletedModal = (
     <AbsoluteWrapp>
       <TextError>User deleted successfully</TextError>
-      <Button onClick={closeModal}>Close</Button>
+      <Button onClick={clooseModal}>Cloose</Button>
     </AbsoluteWrapp>
   );
-
+  // if we have an error while browsing the tabs it will still show the users but with the modal error to recharge the page
   if (users) {
     return (
       <>

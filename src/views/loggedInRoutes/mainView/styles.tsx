@@ -36,6 +36,7 @@ export const LoaderWrapp = styled.div`
   }
 `;
 
+// Custom button that can accept different properties
 export const Button = styled.div<{
   background?: string;
   color?: string;

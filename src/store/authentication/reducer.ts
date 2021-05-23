@@ -4,6 +4,7 @@ import { AuthActions, AuthState, authTypes } from "./types";
 const initialState: AuthState = {
   pending: false,
   error: null,
+  // gets the token from the local storage
   token: getToken(),
 };
 
@@ -23,7 +24,6 @@ const AuthReducer = (state = initialState, action: AuthActions): AuthState => {
         error: null,
       };
     case authTypes.POST_AUTH_FAILURE:
-      console.log(action.payload.error);
       return {
         ...state,
         pending: false,
@@ -31,6 +31,7 @@ const AuthReducer = (state = initialState, action: AuthActions): AuthState => {
       };
 
     case authTypes.AUTH_LOG_OUT:
+      // remove token from the store and from the localStorage
       deleteToken();
       return {
         ...state,

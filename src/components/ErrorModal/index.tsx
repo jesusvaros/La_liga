@@ -10,6 +10,8 @@ type ErrorProps = {
   bottomPosition?: boolean;
 };
 
+// Component that handlers all errors in the website
+
 const ErrorModal = ({
   error,
   pending,

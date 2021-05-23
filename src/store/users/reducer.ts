@@ -65,10 +65,12 @@ const UserReducer = (
         pending: true,
       };
     case userTypes.EDIT_USER_SUCCESS:
+      // Replace the user edited on the store, so we don't need another call to the back to fetch the new changes
       const users = state.users
         ? state.users.data.map((user) =>
             user.id === action.payload.user.id
-              ? { ...action.payload.user, avatar: user.avatar }
+              ? // the avatar prop does not come with the new values
+                { ...action.payload.user, avatar: user.avatar }
               : user
           )
         : [];
@@ -99,6 +101,7 @@ const UserReducer = (
         pending: true,
       };
     case userTypes.DELETE_USER_SUCCESS:
+      // Remove the deleted user from the store
       const newUsers = state.users
         ? state.users.data.filter((user) => user.id !== action.payload.userId)
         : [];

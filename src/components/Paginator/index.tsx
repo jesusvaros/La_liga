@@ -12,6 +12,7 @@ type PaginationProps = {
 const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
   const dispatch = useDispatch();
 
+  //Fetch the new data frm the backend with the new page number
   const selectPage = useCallback(
     (item: number) => () => {
       dispatch(fetchUsersRequest({ page: item }));
@@ -19,8 +20,10 @@ const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
     [dispatch]
   );
 
+  // To check if we are in the first or the last page to not allow the user to click on the arrows
   const disabledLeft = pending || currentPage === 1;
   const disabledRight = pending || currentPage === totalPages;
+
   return (
     <PaginatorWrapp>
       <Left
@@ -28,6 +31,7 @@ const Pagination = ({ currentPage, totalPages, pending }: PaginationProps) => {
         disabled={disabledLeft}
       />
       {Array.from({ length: totalPages }, (_, index) => {
+        // Const used for not allow the user to click on the current page
         const selected = pending || currentPage === index + 1;
         return (
           <NumberButton

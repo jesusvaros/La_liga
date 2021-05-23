@@ -24,6 +24,8 @@ const DetailUserView = () => {
   const { pending, detailUser, error, submitted } = useSelector(
     (state: RootState) => state.users
   );
+  // Checks for the values of the detail user on the backend we could also take that value from the array of users
+  // on the store to allow the patch without having to fetch every time we enter the view
   useEffect(() => {
     dispatch(fetchUserRequest({ id: userId }));
   }, [dispatch, userId]);
@@ -32,7 +34,8 @@ const DetailUserView = () => {
     dispatch(fetchUserRequest({ id: userId }));
   }, [dispatch, userId]);
 
-  const closeModal = useCallback(() => {
+  // Cloose the modal of success editing by setting the var in the store to false
+  const clooseModal = useCallback(() => {
     dispatch(setSubmittedFalse());
   }, [dispatch]);
 
@@ -46,7 +49,7 @@ const DetailUserView = () => {
   const submittedModal = (
     <AbsoluteWrapp>
       <TextError>User edited successfully</TextError>
-      <Button onClick={closeModal}>Close</Button>
+      <Button onClick={clooseModal}>Cloose</Button>
     </AbsoluteWrapp>
   );
 

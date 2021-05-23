@@ -10,6 +10,7 @@ const UserCard = ({ id, avatar, email, first_name, last_name }: User) => {
   const dispatch = useDispatch();
 
   const redirectToUser = useCallback(() => {
+    // Restart the values of single user on the store to avoid having the values from past detail user view
     dispatch(userToDefault());
     push(`/user/${id}`);
   }, [id, push, dispatch]);

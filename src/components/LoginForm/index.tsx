@@ -9,6 +9,7 @@ import { Button } from "../../views/loggedInRoutes/mainView/styles";
 import { Label, Wrapp } from "../EditUserForm/styles";
 import { Eye, EyeOff } from "react-feather";
 
+// Custom field component to allow the user to see the password by clicking on the eye icon
 const PasswordField: FC<WrappedFieldProps> = ({ input }) => {
   const [type, setType] = useState<"text" | "password">("password");
 
