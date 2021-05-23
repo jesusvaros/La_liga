@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Loader } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router-dom";
@@ -8,15 +8,14 @@ import {
   fetchUserRequest,
   setSubmittedFalse,
 } from "../../../store/users/actions";
-import {
-  Button,
-  LoaderWrapp,
-  TextError,
-  AbsoluteWrapp,
-  BlurScreen,
-} from "../mainView/styles";
+import { Button, LoaderWrapp, BlurScreen } from "../mainView/styles";
 
 import EditUserDetailForm from "../../../components/EditUserForm";
+import ErrorModal from "../../../components/ErrorModal";
+import {
+  AbsoluteWrapp,
+  TextError,
+} from "../../../components/ErrorModal/styles";
 
 const DetailUserView = () => {
   const dispatch = useDispatch();
@@ -25,34 +24,17 @@ const DetailUserView = () => {
   const { pending, detailUser, error, submitted } = useSelector(
     (state: RootState) => state.users
   );
-  const [loadingRecharge, setLoadingRecharge] = useState(false);
   useEffect(() => {
     dispatch(fetchUserRequest({ id: userId }));
   }, [dispatch, userId]);
 
   const fetchData = useCallback(() => {
-    setLoadingRecharge(true);
     dispatch(fetchUserRequest({ id: userId }));
-    setTimeout(() => {
-      setLoadingRecharge(false);
-    }, 2000);
   }, [dispatch, userId]);
 
   const clooseModal = useCallback(() => {
     dispatch(setSubmittedFalse());
   }, [dispatch]);
-
-  const errorHandle = (
-    <AbsoluteWrapp>
-      <TextError>{loadingRecharge ? "Loading..." : error}</TextError>
-      <Button
-        disabled={loadingRecharge || pending}
-        onClick={loadingRecharge || pending ? undefined : fetchData}
-      >
-        Recharge
-      </Button>
-    </AbsoluteWrapp>
-  );
 
   const submittedModal = (
     <AbsoluteWrapp>
@@ -79,7 +61,7 @@ const DetailUserView = () => {
           onSubmit={onSubmit}
         />
 
-        {error && errorHandle}
+        <ErrorModal error={error} pending={pending} onRecharge={fetchData} />
         {submitted && submittedModal}
 
         {(submitted || error) && <BlurScreen />}
@@ -89,7 +71,7 @@ const DetailUserView = () => {
     return (
       <LoaderWrapp>
         <Loader />
-        {error && errorHandle}
+        <ErrorModal error={error} pending={pending} onRecharge={fetchData} />
       </LoaderWrapp>
     );
   }

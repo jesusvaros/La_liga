@@ -1,18 +1,12 @@
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Loader } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import UserCard from "../../../components/Card";
+import ErrorModal from "../../../components/ErrorModal";
 import Pagination from "../../../components/Paginator";
 import { RootState } from "../../../store/reducer";
 import { fetchUsersRequest } from "../../../store/users/actions";
-import {
-  Button,
-  CardsWrapp,
-  LoaderWrapp,
-  TextError,
-  AbsoluteWrapp,
-  BlurScreen,
-} from "./styles";
+import { CardsWrapp, LoaderWrapp, BlurScreen } from "./styles";
 
 const MainView = () => {
   const dispatch = useDispatch();
@@ -28,13 +22,6 @@ const MainView = () => {
     dispatch(fetchUsersRequest({ page: 1 }));
   }, [dispatch]);
 
-  const errorHandle = (
-    <>
-      <TextError>{error}</TextError>
-      <Button onClick={pending ? undefined : fetchData}>Recharge</Button>
-    </>
-  );
-
   if (users) {
     return (
       <>
@@ -42,7 +29,13 @@ const MainView = () => {
           {users.data.map((user) => (
             <UserCard key={user.id} {...user} />
           ))}
-          {error && <AbsoluteWrapp>{errorHandle}</AbsoluteWrapp>}
+          {error && (
+            <ErrorModal
+              error={error}
+              pending={pending}
+              onRecharge={fetchData}
+            />
+          )}
         </CardsWrapp>
         <Pagination
           currentPage={users.page}
@@ -56,7 +49,7 @@ const MainView = () => {
     return (
       <LoaderWrapp>
         <Loader />
-        {error && errorHandle}
+        <ErrorModal error={error} onRecharge={fetchData} pending={pending} />
       </LoaderWrapp>
     );
   }
