@@ -6,10 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation Guide
 
-    After downloaded or cloned the proyect you need to run `yarn` on the 
-    console to install all the dependencies
+After downloaded or cloned the proyect you need to run `yarn` on the 
+console to install all the dependencies
 
-    Then you have to run `yarn start` and the web will run on port 3000.
+Then you have to run `yarn start` and the web will run on port 3000.
 
 
 ## Dependencies
