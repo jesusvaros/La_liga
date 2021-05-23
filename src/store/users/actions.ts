@@ -1,40 +1,48 @@
 import {
-  postTypes,
+  userTypes,
+  // Get all users
   FetchUsersFailurePayload,
   FetchUsersFailure,
   FetchUsersSuccessPayload,
   FetchUsersSuccess,
   FetchUsersRequestPayload,
   FetchUsersRequest,
-  //
+  // Get user by id
   FetchUserFailurePayload,
   FetchUserFailure,
   FetchUserSuccessPayload,
   FetchUserSuccess,
   FetchUserRequestPayload,
   FetchUserRequest,
+  // Edit user
+  EditUserRequestPayload,
+  EditUserRequest,
+  EditUserSuccessPayload,
+  EditUserSuccess,
+  EditUserFailurePayload,
+  EditUserFailure,
 } from "./types";
 
-//get all users
+// Get all users
 
 export const fetchUsersRequest = (
   payload: FetchUsersRequestPayload
 ): FetchUsersRequest => ({
-  type: postTypes.FETCH_USERS_REQUEST,
+  type: userTypes.FETCH_USERS_REQUEST,
   payload,
 });
 
 export const fetchUsersSuccess = (
   payload: FetchUsersSuccessPayload
 ): FetchUsersSuccess => ({
-  type: postTypes.FETCH_USERS_SUCCESS,
+  type: userTypes.FETCH_USERS_SUCCESS,
   payload,
 });
 
 export const fetchUsersFailure = (
   payload: FetchUsersFailurePayload
 ): FetchUsersFailure => ({
-  type: postTypes.FETCH_USERS_FAILURE,
+  type: userTypes.FETCH_USERS_FAILURE,
   payload,
 });
 
@@ -43,20 +51,47 @@ export const fetchUsersFailure = (
 export const fetchUserRequest = (
   payload: FetchUserRequestPayload
 ): FetchUserRequest => ({
-  type: postTypes.FETCH_USER_REQUEST,
+  type: userTypes.FETCH_USER_REQUEST,
   payload,
 });
 
 export const fetchUserSuccess = (
   payload: FetchUserSuccessPayload
 ): FetchUserSuccess => ({
-  type: postTypes.FETCH_USER_SUCCESS,
+  type: userTypes.FETCH_USER_SUCCESS,
   payload,
 });
 
 export const fetchUserFailure = (
   payload: FetchUserFailurePayload
 ): FetchUserFailure => ({
-  type: postTypes.FETCH_USER_FAILURE,
+  type: userTypes.FETCH_USER_FAILURE,
   payload,
+});
+
+// Edit user
+
+export const editUserRequest = (
+  payload: EditUserRequestPayload
+): EditUserRequest => ({
+  type: userTypes.EDIT_USER_REQUEST,
+  payload,
+});
+
+export const editUserSuccess = (
+  payload: EditUserSuccessPayload
+): EditUserSuccess => ({
+  type: userTypes.EDIT_USER_SUCCESS,
+  payload,
+});
+
+export const editUserFailure = (
+  payload: EditUserFailurePayload
+): EditUserFailure => ({
+  type: userTypes.EDIT_USER_FAILURE,
+  payload,
+});
+
+export const setSubmittedFalse = () => ({
+  type: userTypes.SET_EDIT_USER_FALSE,
 });

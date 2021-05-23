@@ -6,6 +6,7 @@ export const PageWrapp = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 `;
 
 export const Header = styled.div`

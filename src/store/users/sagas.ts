@@ -5,9 +5,17 @@ import {
   fetchUsersFailure,
   fetchUserSuccess,
   fetchUserFailure,
+  editUserSuccess,
+  editUserFailure,
 } from "./actions";
-import { GetUsersResponse } from "./models";
-import { FetchUserRequest, FetchUsersRequest, postTypes } from "./types";
+import { GetUsersResponse, User } from "./models";
+import {
+  EditUserRequest,
+  EditUserRequestPayload,
+  FetchUserRequest,
+  FetchUsersRequest,
+  userTypes,
+} from "./types";
 
 const getUsers = (page: number) => () =>
   axios.get<GetUsersResponse[]>(`https://reqres.in/api/users?page=${page}`);
@@ -30,7 +38,7 @@ function* fetchUsersSaga(action: FetchUsersRequest) {
 }
 
 const getUser = (id: number) => () =>
-  axios.get<GetUsersResponse[]>(`https://reqres.in/api/users/${id}`);
+  axios.get<User>(`https://reqres.in/api/users/${id}`);
 
 function* fetchUserSaga(action: FetchUserRequest) {
   try {
@@ -49,9 +57,28 @@ function* fetchUserSaga(action: FetchUserRequest) {
   }
 }
 
+const editUser = (payload: EditUserRequestPayload) => () =>
+  axios.patch<User>(`https://reqres.in/api/users/${payload.id}`, payload.data);
+
+function* editchUserSaga(action: EditUserRequest) {
+  try {
+    const response: AxiosResponse<User> = yield call(editUser(action.payload));
+    yield put(
+      editUserSuccess({ user: { ...response.data, id: action.payload.id } })
+    );
+  } catch (e) {
+    yield put(
+      editUserFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
 function* usersSaga() {
-  yield all([takeLatest(postTypes.FETCH_USERS_REQUEST, fetchUsersSaga)]);
-  yield all([takeLatest(postTypes.FETCH_USER_REQUEST, fetchUserSaga)]);
+  yield all([takeLatest(userTypes.FETCH_USERS_REQUEST, fetchUsersSaga)]);
+  yield all([takeLatest(userTypes.FETCH_USER_REQUEST, fetchUserSaga)]);
+  yield all([takeLatest(userTypes.EDIT_USER_REQUEST, editchUserSaga)]);
 }
 
 export default usersSaga;

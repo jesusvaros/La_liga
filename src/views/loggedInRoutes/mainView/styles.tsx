@@ -7,7 +7,6 @@ export const CardsWrapp = styled.div`
   padding: 24px;
   flex-wrap: wrap;
   overflow: auto;
-  position: relative;
 `;
 
 export const LoaderWrapp = styled.div`
@@ -46,6 +45,7 @@ export const Button = styled.div<{
   background?: string;
   color?: string;
   max_width?: number;
+  disabled?: boolean;
 }>`
   background: #2b63e7;
   border-radius: 4px;
@@ -61,11 +61,12 @@ export const Button = styled.div<{
   ${({ background }) => background && `background:${background}`};
   ${({ color }) => color && `color:${color}`};
   ${({ max_width }) => max_width && `max-width:${max_width}px`};
+  ${({ disabled }) => disabled && `opacity:0.2;`};
   svg {
     margin-right: 12px;
   }
   :hover {
-    opacity: 0.9;
+    ${({ disabled }) => !disabled && ` opacity: 0.9`};
   }
 `;
 
@@ -74,10 +75,19 @@ export const AbsoluteWrapp = styled.div`
   background-color: white;
   padding: 44px;
   border-radius: 14px;
-  top: calc(50% + 165px);
-  left: calc(50% - 95px);
+  top: 37%;
+  left: calc(50% - 125px);
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px 0, rgba(0, 0, 0, 0.05) 0 0 4px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1; ;
+`;
+
+export const BlurScreen = styled.div`
+  position: fixed;
+  background-color: black;
+  opacity: 0.1;
+  width: 100%;
+  height: 100%;
 `;

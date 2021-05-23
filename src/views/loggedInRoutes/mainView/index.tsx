@@ -11,11 +11,12 @@ import {
   LoaderWrapp,
   TextError,
   AbsoluteWrapp,
+  BlurScreen,
 } from "./styles";
 
 const MainView = () => {
   const dispatch = useDispatch();
-  const { pending, usersResponse, error } = useSelector(
+  const { pending, users, error } = useSelector(
     (state: RootState) => state.users
   );
 
@@ -34,20 +35,21 @@ const MainView = () => {
     </>
   );
 
-  if (usersResponse) {
+  if (users) {
     return (
       <>
         <CardsWrapp>
-          {usersResponse.data.map((user) => (
+          {users.data.map((user) => (
             <UserCard key={user.id} {...user} />
           ))}
           {error && <AbsoluteWrapp>{errorHandle}</AbsoluteWrapp>}
         </CardsWrapp>
         <Pagination
-          currentPage={usersResponse.page}
-          totalPages={usersResponse.total_pages}
+          currentPage={users.page}
+          totalPages={users.total_pages}
           pending={pending || !!error}
         />
+        {error && <BlurScreen />}
       </>
     );
   } else {
