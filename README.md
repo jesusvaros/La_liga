@@ -32,7 +32,8 @@ All this libraries need to have installed their correponding types to work on ty
 
 ## Installation Guide
 
-    After downloaded or cloned the proyect , you need to run `yarn` on the console to install all the dependencies
+    After downloaded or cloned the proyect you need to run `yarn` on the 
+    console to install all the dependencies
 
     Then you have to run `yarn start` and the web will run on port 3000.
 ## Available Scripts
