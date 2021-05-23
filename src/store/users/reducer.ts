@@ -4,7 +4,7 @@ const initialState: UsersState = {
   pending: false,
   users: undefined,
   error: null,
-  detailUser: undefined,
+  detailUser: null,
   submitted: false,
   deleted: false,
 };
@@ -50,6 +50,12 @@ const UserReducer = (
         ...state,
         pending: false,
         error: action.payload.error,
+      };
+
+    case userTypes.SET_USER_DEFAULT_NULL:
+      return {
+        ...state,
+        detailUser: null,
       };
 
     // Edit user

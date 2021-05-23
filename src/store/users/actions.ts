@@ -73,6 +73,10 @@ export const fetchUserFailure = (
   payload,
 });
 
+export const userToDefault = () => ({
+  type: userTypes.SET_USER_DEFAULT_NULL,
+});
+
 // Edit user
 
 export const editUserRequest = (

@@ -13,6 +13,7 @@ export enum userTypes {
   EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS",
   EDIT_USER_FAILURE = "EDIT_USER_FAILURE",
   SET_EDIT_USER_FALSE = "SET_EDIT_USER_FALSE",
+  SET_USER_DEFAULT_NULL = "SET_USER_DEFAULT_NULL",
 
   DELETE_USER_REQUEST = "DELETE_USER_REQUEST",
   DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS",
@@ -23,7 +24,7 @@ export interface UsersState {
   pending: boolean;
   users: GetUsersResponse | undefined;
   error: string | null;
-  detailUser: { data: User } | undefined;
+  detailUser: { data: User } | null;
   submitted: boolean;
   deleted: boolean;
 }
@@ -77,6 +78,10 @@ export type FetchUserSuccess = {
 export type FetchUserFailure = {
   type: typeof userTypes.FETCH_USER_FAILURE;
   payload: FailurePayload;
+};
+
+export type SetUserDefaultNull = {
+  type: typeof userTypes.SET_USER_DEFAULT_NULL;
 };
 
 // Edit user
@@ -147,6 +152,7 @@ export type UsersActions =
   | EditUserSuccess
   | EditUserFailure
   | SetSendedFalse
+  | SetUserDefaultNull
   | DeleteUserRequest
   | DeleteUserSuccess
   | DeleteUserFailure;

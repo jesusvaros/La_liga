@@ -20,6 +20,7 @@ export const CardWrapp = styled.div`
   align-items: center;
   transition: transform 200ms;
   background-color: white;
+  max-height: 40%;
 
   * + * {
     margin-top: 4px;
