@@ -6,6 +6,7 @@ export const CardsWrapp = styled.div`
   justify-content: space-between;
   padding: 24px;
   flex-wrap: wrap;
+  overflow: auto;
 `;
 
 export const LoaderWrapp = styled.div`

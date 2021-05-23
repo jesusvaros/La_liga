@@ -6,11 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation Guide
 
-After downloaded or cloned the proyect you need to run `yarn` on the 
+After downloaded or cloned the proyect you need to run `yarn` on the
 console to install all the dependencies
 
 Then you have to run `yarn start` and the web will run on port 3000.
-
 
 ## Dependencies
 
@@ -34,10 +33,9 @@ The package installed for this project can be found on `package.json` the most i
 The ones that were not required on the guide are:
 
 2. axios: 0.21.1 => Used to make easier the calls to the api
-5. react-feather: 2.0.9 => Icons Library
-6. react-google-login => 5.2.2 => Easy way to implement a google login on react
-11. redux-form: 8.3.7 => Can manage the state of every form in the app
-
+3. react-feather: 2.0.9 => Icons Library
+4. react-google-login => 5.2.2 => Easy way to implement a google login on react
+5. redux-form: 8.3.7 => Can manage the state of every form in the app
 
 All this libraries need to have installed their correponding types to work on typescript.
 
@@ -61,5 +59,3 @@ There is no need to run `yarn prettier --write .` on every commit due to the ins
 that runs the command.
 
 It will also check for eslint problems.
-
-
