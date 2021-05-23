@@ -1,14 +1,13 @@
 import {
   userTypes,
+  FailurePayload,
   // Get all users
-  FetchUsersFailurePayload,
   FetchUsersFailure,
   FetchUsersSuccessPayload,
   FetchUsersSuccess,
   FetchUsersRequestPayload,
   FetchUsersRequest,
   // Get user by id
-  FetchUserFailurePayload,
   FetchUserFailure,
   FetchUserSuccessPayload,
   FetchUserSuccess,
@@ -19,14 +18,12 @@ import {
   EditUserRequest,
   EditUserSuccessPayload,
   EditUserSuccess,
-  EditUserFailurePayload,
   EditUserFailure,
   //Delete user
   DeleteUserRequestPayload,
   DeleteUserRequest,
   DeleteUserSuccessPayload,
   DeleteUserSuccess,
-  DeleteUserFailurePayload,
   DeleteUserFailure,
 } from "./types";
 
@@ -47,7 +44,7 @@ export const fetchUsersSuccess = (
 });
 
 export const fetchUsersFailure = (
-  payload: FetchUsersFailurePayload
+  payload: FailurePayload
 ): FetchUsersFailure => ({
   type: userTypes.FETCH_USERS_FAILURE,
   payload,
@@ -70,7 +67,7 @@ export const fetchUserSuccess = (
 });
 
 export const fetchUserFailure = (
-  payload: FetchUserFailurePayload
+  payload: FailurePayload
 ): FetchUserFailure => ({
   type: userTypes.FETCH_USER_FAILURE,
   payload,
@@ -92,9 +89,7 @@ export const editUserSuccess = (
   payload,
 });
 
-export const editUserFailure = (
-  payload: EditUserFailurePayload
-): EditUserFailure => ({
+export const editUserFailure = (payload: FailurePayload): EditUserFailure => ({
   type: userTypes.EDIT_USER_FAILURE,
   payload,
 });
@@ -120,7 +115,7 @@ export const deleteUserSuccess = (
 });
 
 export const deleteUserFailure = (
-  payload: DeleteUserFailurePayload
+  payload: FailurePayload
 ): DeleteUserFailure => ({
   type: userTypes.DELETE_USER_FAILURE,
   payload,

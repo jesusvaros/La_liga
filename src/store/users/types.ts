@@ -28,6 +28,10 @@ export interface UsersState {
   deleted: boolean;
 }
 
+export interface FailurePayload {
+  error: string;
+}
+
 // Get all users
 export interface FetchUsersRequestPayload {
   page: number;
@@ -36,9 +40,6 @@ export interface FetchUsersSuccessPayload {
   users: GetUsersResponse;
 }
 
-export interface FetchUsersFailurePayload {
-  error: string;
-}
 export interface FetchUsersRequest {
   type: typeof userTypes.FETCH_USERS_REQUEST;
   payload: FetchUsersRequestPayload;
@@ -51,7 +52,7 @@ export type FetchUsersSuccess = {
 
 export type FetchUsersFailure = {
   type: typeof userTypes.FETCH_USERS_FAILURE;
-  payload: FetchUsersFailurePayload;
+  payload: FailurePayload;
 };
 
 // Get user by id
@@ -61,10 +62,6 @@ export interface FetchUserRequestPayload {
 }
 export interface FetchUserSuccessPayload {
   user: { data: User };
-}
-
-export interface FetchUserFailurePayload {
-  error: string;
 }
 
 export interface FetchUserRequest {
@@ -79,7 +76,7 @@ export type FetchUserSuccess = {
 
 export type FetchUserFailure = {
   type: typeof userTypes.FETCH_USER_FAILURE;
-  payload: FetchUserFailurePayload;
+  payload: FailurePayload;
 };
 
 // Edit user
@@ -96,10 +93,6 @@ export interface EditUserSuccessPayload {
   user: User;
 }
 
-export interface EditUserFailurePayload {
-  error: string;
-}
-
 export interface EditUserRequest {
   type: typeof userTypes.EDIT_USER_REQUEST;
   payload: EditUserRequestPayload;
@@ -112,7 +105,7 @@ export type EditUserSuccess = {
 
 export type EditUserFailure = {
   type: typeof userTypes.EDIT_USER_FAILURE;
-  payload: EditUserFailurePayload;
+  payload: FailurePayload;
 };
 
 export type SetSendedFalse = {
@@ -128,10 +121,6 @@ export interface DeleteUserSuccessPayload {
   userId: number;
 }
 
-export interface DeleteUserFailurePayload {
-  error: string;
-}
-
 export interface DeleteUserRequest {
   type: typeof userTypes.DELETE_USER_REQUEST;
   payload: DeleteUserRequestPayload;
@@ -144,7 +133,7 @@ export type DeleteUserSuccess = {
 
 export type DeleteUserFailure = {
   type: typeof userTypes.DELETE_USER_FAILURE;
-  payload: DeleteUserFailurePayload;
+  payload: FailurePayload;
 };
 
 export type UsersActions =
