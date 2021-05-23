@@ -13,7 +13,7 @@ function* postLogInSaga(action: PostAuthRequest) {
   } catch (e) {
     yield put(
       postAuthFailure({
-        error: e.message,
+        error: e.response.data.error,
       })
     );
   }

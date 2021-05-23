@@ -5,15 +5,23 @@ import { TextError, AbsoluteWrapp } from "./styles";
 type ErrorProps = {
   error: string | null;
   pending: boolean;
-  onRecharge: () => void;
+  onRecharge?: () => void;
+  titleButton?: string;
+  bottomPosition?: boolean;
 };
 
-const ErrorModal = ({ error, pending, onRecharge }: ErrorProps) => {
+const ErrorModal = ({
+  error,
+  pending,
+  onRecharge,
+  titleButton = "Recharge",
+  bottomPosition,
+}: ErrorProps) => {
   const [loadingRecharge, setLoadingRecharge] = useState(false);
 
   const onClick = useCallback(() => {
     setLoadingRecharge(true);
-    onRecharge();
+    onRecharge && onRecharge();
     setTimeout(() => {
       setLoadingRecharge(false);
     }, 2000);
@@ -23,14 +31,16 @@ const ErrorModal = ({ error, pending, onRecharge }: ErrorProps) => {
     return null;
   }
   return (
-    <AbsoluteWrapp>
+    <AbsoluteWrapp bottomPosition={bottomPosition}>
       <TextError>{loadingRecharge ? "Loading..." : error}</TextError>
-      <Button
-        disabled={loadingRecharge || pending}
-        onClick={loadingRecharge || pending ? undefined : onClick}
-      >
-        Recharge
-      </Button>
+      {onRecharge && (
+        <Button
+          disabled={loadingRecharge || pending}
+          onClick={loadingRecharge || pending ? undefined : onClick}
+        >
+          {titleButton}
+        </Button>
+      )}
     </AbsoluteWrapp>
   );
 };

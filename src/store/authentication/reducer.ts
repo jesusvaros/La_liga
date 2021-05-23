@@ -1,4 +1,4 @@
-import { getToken, setToken } from "../../storage";
+import { deleteToken, getToken, setToken } from "../../storage";
 import { AuthActions, AuthState, authTypes } from "./types";
 
 const initialState: AuthState = {
@@ -23,6 +23,7 @@ const AuthReducer = (state = initialState, action: AuthActions): AuthState => {
         error: null,
       };
     case authTypes.POST_AUTH_FAILURE:
+      console.log(action.payload.error);
       return {
         ...state,
         pending: false,
@@ -30,9 +31,15 @@ const AuthReducer = (state = initialState, action: AuthActions): AuthState => {
       };
 
     case authTypes.AUTH_LOG_OUT:
+      deleteToken();
       return {
         ...state,
         token: null,
+      };
+    case authTypes.REMOVE_AUTH_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

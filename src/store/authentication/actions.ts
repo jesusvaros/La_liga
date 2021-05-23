@@ -30,3 +30,6 @@ export const postAuthFailure = (payload: FailurePayload): PostAuthFailure => ({
 export const authLogOut = () => ({
   type: authTypes.AUTH_LOG_OUT,
 });
+export const RemoveAuthError = () => ({
+  type: authTypes.REMOVE_AUTH_ERROR,
+});

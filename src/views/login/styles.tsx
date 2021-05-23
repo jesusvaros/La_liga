@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GoogleLogin } from "react-google-login";
 
 import { ReactComponent as Liga } from "../../assets/laliga.svg";
 
@@ -9,7 +10,6 @@ export const LoginWrapp = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-
   background: linear-gradient(
     180deg,
     #eff5ff 18.99%,
@@ -49,4 +49,8 @@ export const LoginCard = styled.div`
 export const LigaIcon = styled(Liga)`
   height: 80px;
   width: auto;
+`;
+
+export const GoogleLoginButton = styled(GoogleLogin)`
+  margin-top: 24px;
 `;

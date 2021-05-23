@@ -5,7 +5,7 @@ export const TextError = styled.span`
   margin-bottom: 24px;
 `;
 
-export const AbsoluteWrapp = styled.div`
+export const AbsoluteWrapp = styled.div<{ bottomPosition?: boolean }>`
   position: absolute;
   background-color: white;
   padding: 44px;
@@ -16,5 +16,8 @@ export const AbsoluteWrapp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1; ;
+  z-index: 1;
+
+  ${({ bottomPosition }) =>
+    bottomPosition && `top:unset;bottom:24px;right:24px;left:unset`};
 `;
