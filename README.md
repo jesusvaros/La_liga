@@ -28,9 +28,14 @@ The ones that were not required on the guide are:
 
 
 All this libraries need to have installed their correponding types to work on typescript.
-## Available Scripts
 
-In the project directory, you can run:
+
+## Installation Guide
+
+    After downloaded or cloned the proyect , you need to run `yarn` on the console to install all the dependencies
+
+    Then you have to run `yarn start` and the web will run on port 3000.
+## Available Scripts
 
 ### `yarn start`
 
