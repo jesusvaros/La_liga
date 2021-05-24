@@ -49,6 +49,7 @@ export const LoginCard = styled.div`
 export const LigaIcon = styled(Liga)`
   height: 80px;
   width: auto;
+  min-height: 80px;
 `;
 
 export const GoogleLoginButton = styled(GoogleLogin)`

@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect } from "react-router";
 import ErrorModal from "../../components/ErrorModal";
 import LoginForm from "../../components/LoginForm";
-import { setToken } from "../../storage";
 import {
   postAuthRequest,
   RemoveAuthError,
 } from "../../store/authentication/actions";
 import { RootState } from "../../store/reducer";
-import { LoginWrapp, LoginCard, LigaIcon, GoogleLoginButton } from "./styles";
+import { LoginWrapp, LoginCard, LigaIcon } from "./styles";
 
-const clientId = "configureId.apps.googleusercontent.com";
+// const clientId = "configureId.apps.googleusercontent.com";
 
 const LoginView = () => {
   const dispatch = useDispatch();
@@ -38,10 +37,10 @@ const LoginView = () => {
   }, [error, clooseModalError]);
 
   // Log in validation callbacks it needs the clientId to work properly
-  const onSuccessGoogleLogIn = useCallback((res) => {
-    setToken(res.token);
-  }, []);
-  const onFailureGoogleLogIn = useCallback(() => {}, []);
+  // const onSuccessGoogleLogIn = useCallback((res) => {
+  //   setToken(res.token);
+  // }, []);
+  // const onFailureGoogleLogIn = useCallback(() => {}, []);
 
   return (
     <Switch>
@@ -50,13 +49,13 @@ const LoginView = () => {
           <LoginCard>
             <LigaIcon />
             <LoginForm onSubmit={onSubmit} />
-            <GoogleLoginButton
+            {/* <GoogleLoginButton
               clientId={clientId}
               onSuccess={onSuccessGoogleLogIn}
               buttonText="LogIn"
               onFailure={onFailureGoogleLogIn}
               isSignedIn={true}
-            />
+            /> */}
           </LoginCard>
 
           <ErrorModal
