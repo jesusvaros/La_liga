@@ -35,13 +35,26 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "simple-pre-commit"
+  },
+  "simple-pre-commit": "npx lint-staged",
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -56,6 +69,9 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.3.0"
+    "eslint-plugin-prettier": "^3.4.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "simple-pre-commit": "^1.2.1"
   }
 }
